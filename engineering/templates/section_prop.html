@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block body_block %}
+<div class="container">
+        <div class="row justify-content-center">
+          <div class="col-8">
+            <h2 class="mt-2">Rectangular Section Properties Calculator</h2>
+            <hr class="mt-0 mb-4">
+            </div>
+        </div>
+      </div>
+    <div class="container">
+        <div class="jumbotron">
+      <form method="POST">
+        {{ form.as_p}}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-success">Submit</button>
+
+   </form>
+
+</div>
+<p></p>
+<p></p>
+<hr>
+<h4>{{result3}}   <span style="color:blue">{{ result1 }} </span> </h4>
+<p></p>
+<hr>
+<h4>{{result4}}<span style="color:blue">{{ result2 }} </span> </h4>
+</div>
+{% endblock %}

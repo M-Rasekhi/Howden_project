@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+ {% load crispy_forms_tags %} 
+{% block body_block %}
+<div class="container">
+        <div class="row justify-content-center">
+          <div class="col-8">
+            <h2 class="mt-2">Fan Unpalance Calculator</h2>
+            <hr class="mt-0 mb-4">
+            </div>
+        </div>
+      </div>
+     <div class="container">
+        <div class="jumbotron"> 
+
+    <h1>FAN UNBALANCE</h1>
+   <form class="form-group row" method="POST">
+    <div class="col-sm-10"> 
+    <div class="container">
+        <div class="jumbotron">
+      <form method="POST" novalidate>
+          <div class="row">
+                <div class="col-6">
+                 {{ form.site_class|as_crispy_field }}
+                </div> 
+                <div class="col-6">
+                  {{ form.res_mod_coeff|as_crispy_field }}
+                </div> 
+                <div class="col-6">
+                  {{ form.risk_cat|as_crispy_field }}
+                </div> 
+                 
+                <div class="col-6">
+                  {{ form.ss|as_crispy_field }}
+               </div> 
+               <div class="col-6">
+                    {{ form.s1|as_crispy_field }}
+                 </div>
+                <div class="col-6">
+                  {{ form.fund_period|as_crispy_field }}
+               </div>
+               <div class="col-6">
+                  {{ form.long_period|as_crispy_field }}
+               </div>  
+               <div class="col-6">
+                  {{ form.height|as_crispy_field }}
+               </div>  
+               <div class="col-6">
+                  {{ form.structure_type|as_crispy_field }}
+               </div>  
+               <div class="col-6">
+                  {{ form.site_class_calculated|as_crispy_field }}
+               </div>  
+               
+        {% csrf_token %}
+               <hr>
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-success">Submit</button>
+            </div>
+        </div> 
+
+   </form>
+
+</div>
+</div>
+</div>
+
+<div>
+<p></p>
+<p></p>
+<hr>
+<h3>Seismic Response Coefficient Cs = <span style="color:blue">{{ result8 }}</span></h3>
+
+<hr>
+<h4> Importance Factor = <span style="color:blue">{{ result1 }}</span></h4>
+<h4> Fa = <span style="color:blue">{{ result2 }}</span></h4>
+<h4> Fv = <span style="color:blue">{{ result3 }} {{ result13}}</span></h4>
+<h4> Sm1 = <span style="color:blue">{{ result4 }}</span></h4>
+<h4> Sms = <span style="color:blue">{{ result5 }}</span></h4>
+<h4> SD1 = <span style="color:blue">{{ result6 }}</span></h4>
+<h4> SDs = <span style="color:blue">{{ result7 }}</span></h4>
+<h4>  Period upper limit coefficient = <span style="color:blue">{{ result9 }}</span></h4>
+<h4>  Ct parameter = <span style="color:blue">{{ result10 }}</span></h4>
+<h4>  x parameter = <span style="color:blue">{{ result11 }}</span></h4>
+<h4>  Ta = <span style="color:blue">{{ result14 }}</span></h4>
+<h4>  Seismic design category = <span style="color:blue">{{ result12 }}</span></h4>
+<p></p>
+ 
+</div>
+{% endblock %}
+
+
+quake = Quake(A, B, C, D, E, F, G, H, I, J)
+result1 = quake.importance_factor()
+result2 = quake.fa()
+result3 = quake.fv()
+result4 = quake.sm_one()
+result5 = quake.sm_s()
+result6 = quake.sd_one()
+result7 = quake.sd_s()
+result8 = quake.cs()
+result9 = quake.cu()
+result10 = quake.x()
+result11 = quake.ta()
+result12 = quake.seismic_design_cat()
